@@ -53,17 +53,11 @@ export class ReactiveFormComponent {
       this.userId = qp['id'];
     });
 
-    const tmp = {
-       "firstName" :this.user.firstName,
-       "lastName" :this.user.lastName,
-       "middleName" :this.user.middleName,
-       "age" :this.user.age,
-       "gender" :this.user.gender,
-       "hobbies":this.user.hobbies,
-       "company" :this.user.company,
-    };
-    this.reactForm.setValue(tmp);
-    
+    this.reactForm.reset();    
+  }
+
+  getFullName():string{
+   return (this.reactForm.get('firstName')?.value ?? "") +' '+(this.reactForm.get('middleName')?.value ?? "")+' '+(this.reactForm.get('lastName')?.value ?? "");
   }
 
 
@@ -77,7 +71,16 @@ export class ReactiveFormComponent {
   getData(){
     if (this.userService.isUserExist(this.userId!)){
       this.user = this.userService.getUser(this.userId!)!;
-      this.reactForm.setValue(this.user);
+      const tmp = {
+        "firstName" :this.user.firstName,
+        "lastName" :this.user.lastName,
+        "middleName" :this.user.middleName,
+        "age" :this.user.age,
+        "gender" :this.user.gender,
+        "hobbies":this.user.hobbies,
+        "company" :this.user.company,
+     };
+      this.reactForm.setValue(tmp);
     }
   }
 

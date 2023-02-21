@@ -23,11 +23,11 @@ export class HomeComponent {
   onIdFormSubmit(){
 
     const id = this.idForm?.form.get('id')?.value;
-    if(this.userService.isUserExist(id)){
-      this.router.navigate(['template'], {queryParams: {id: id}});
-      return;
-    }
-    this.error = "user doesn't exist!";
+    // if(this.userService.isUserExist(id)){
+    this.router.navigate(['template'], {queryParams: {id: id}});
+    //   return;
+    // }
+    // this.error = "user doesn't exist!";
     
   }
 
