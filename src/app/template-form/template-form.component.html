@@ -4,7 +4,7 @@
             <form #tempForm="ngForm" (ngSubmit)="onTempFormSubmit()">
                 <div class="form-horizontal">
 
-                    <div class="form-group col-xs-6">
+                    <div class="form-group mb-2 col-xs-6">
                         <label for="firstName">First name</label>
                         <input type="text" 
                         class="form-control" 
@@ -19,7 +19,7 @@
                             Enter valid name
                         </small>
                     </div>
-                    <div class="form-group col-xs-6">
+                    <div class="form-group mb-2 col-xs-6">
                         <label for="middleName">Middle name</label>
                         <input type="text" 
                         class="form-control" 
@@ -34,7 +34,7 @@
                             Enter valid name
                         </small>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mb-2">
                         <label for="lastName">Last name</label>
                         <input type="text" 
                         class="form-control" 
@@ -50,12 +50,12 @@
                         </small>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group mb-2">
                     <label for="fullName">Full Name</label>
                         <input type="text" class="form-control" id="fullName" name="fullName" placeholder="Full Name" disabled 
                          [ngModel]="user.firstName +' '+ user.middleName +' '+ user.lastName">
                 </div>
-                <div class="form-group">
+                <div class="form-group mb-2">
                     <label for="age">Age</label>
                     <input type="number" class="form-control" id="age" name="age" placeholder="age" 
                     required
@@ -68,7 +68,7 @@
                 </div>
 
                 <label for="gender">Gender</label>
-                <div class="form-group">
+                <div class="form-group mb-2">
                     <input type="radio" class="form-radio-input " value="male" id="male" name="gender" 
                     [(ngModel)]="user.gender" 
                     required
@@ -85,7 +85,7 @@
                     </small>
                 </div>
                 <label for="gender">Hobbies</label>
-                <div class="form-group" ngModelGroup="hobbies" #hobbies="ngModelGroup">
+                <div class="form-group mb-2" ngModelGroup="hobbies" #hobbies="ngModelGroup">
                     <span *ngFor="let hobbi of hobbieList">
                         <input type="checkbox" class="form-check-input me-1"
                          [value]="hobbi" [name]="hobbi" 
@@ -98,7 +98,7 @@
                         Select any one hobbies
                     </small>
                 </div>
-                <div class="form-group">
+                <div class="form-group mb-2">
                     <label for="company">Company</label>
                     <select class="form-control" id="company" name="company" [(ngModel)]="user.company" required>
                         <option>Google</option>

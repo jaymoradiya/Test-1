@@ -13,6 +13,14 @@ export class ReactiveFormComponent {
   
   reactForm: FormGroup = new FormGroup({});
   hobbieList = Hobbies;
+  hobbiesDefault = {
+    'chess': false,
+    'cricket': false,
+    'read': false,
+    'singing': false,
+    'music': false,
+
+  };
   userId : string | undefined;
   user : UserModel  = {
     id: '',
@@ -21,12 +29,14 @@ export class ReactiveFormComponent {
     middleName: '',
     age: 0,
     gender: '',
-    hobbies: {},
+    hobbies: this.hobbiesDefault,
     company: '',
   };
 
 
   constructor(private router: Router, private route: ActivatedRoute,private userService: UserService){
+   
+    
     this.reactForm = new FormGroup({
       'firstName': new FormControl('',{validators: [Validators.required, ]}),
       'lastName':  new FormControl('',{validators: [Validators.required, ]}),
@@ -71,6 +81,11 @@ export class ReactiveFormComponent {
   getData(){
     if (this.userService.isUserExist(this.userId!)){
       this.user = this.userService.getUser(this.userId!)!;
+      this.hobbieList.forEach(h => {
+        if(this.user.hobbies[h] == undefined){
+          this.user.hobbies[h] = false
+        }
+      })
       const tmp = {
         "firstName" :this.user.firstName,
         "lastName" :this.user.lastName,
@@ -80,6 +95,7 @@ export class ReactiveFormComponent {
         "hobbies":this.user.hobbies,
         "company" :this.user.company,
      };
+     console.log(tmp);
       this.reactForm.setValue(tmp);
     }
   }
