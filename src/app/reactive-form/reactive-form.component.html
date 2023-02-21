@@ -1,1 +1,128 @@
-<p>reactive-form works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-10 col-md-8 offset-sm-1 offset-md-2">
+            <form [formGroup]="reactForm" (ngSubmit)="onTempFormSubmit()">
+                <div class="form-horizontal">
+
+                    <div class="form-group col-xs-6">
+                        <label for="firstName">First name</label>
+                        <input type="text" 
+                        class="form-control" 
+                        id="firstName" 
+                        formControlName="firstName"
+                        placeholder="First Name">
+                        <small 
+                        *ngIf="!reactForm.get('firstName')?.valid && reactForm.get('firstName')?.touched" 
+                        class="form-text text-danger">
+                            Enter valid name
+                        </small>
+                    </div>
+                    <div class="form-group col-xs-6">
+                        <label for="middleName">Middle name</label>
+                        <input type="text" 
+                        class="form-control" 
+                        id="middleName" 
+                        formControlName="middleName"
+                        placeholder="Middle Name">
+                        <small 
+                        *ngIf="!reactForm.get('middleName')?.valid && reactForm.get('middleName')?.touched" 
+                        class="form-text text-danger">
+                            Enter valid name
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last name</label>
+                        <input type="text" 
+                        class="form-control" 
+                        id="lastName" 
+                        formControlName="lastName"
+                        placeholder="Last Name">
+                        <small 
+                        *ngIf="!reactForm.get('lastName')?.valid && reactForm.get('lastName')?.touched" 
+                        class="form-text text-danger">
+                            Enter valid name
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                        <input type="text" class="form-control" id="fullName" name="fullName" placeholder="Full Name" disabled 
+                        [value]="reactForm.get('firstName')?.value +' '+reactForm.get('middleName')?.value+' '+reactForm.get('lastName')?.value" >
+                </div>
+                <div class="form-group">
+                    <label for="age">Age</label>
+                    <input type="number" class="form-control" id="age" formControlName="age" placeholder="age" 
+                    >
+                    <small 
+                    *ngIf="!reactForm.get('age')?.valid && reactForm.get('age')?.touched" 
+                    class="form-text text-danger">
+                        Enter valid age
+                    </small>
+                </div>
+
+                <label for="gender">Gender</label>
+                <div class="form-group">
+                    <input type="radio" class="form-radio-input " value="male" id="male" formControlName="gender" 
+                    checked>
+                    <label for="male" class="form-radio-label me-2">Male</label>
+                    <input type="radio" class="form-radio-input" value="female" id="female" formControlName="gender" 
+                    >
+                    <label for="female" class="form-radio-label">Female</label>
+                    <small 
+                    *ngIf="!reactForm.get('gender')?.valid && reactForm.get('gender')?.touched" 
+                    class="form-text text-danger">
+                        please select one gender
+                    </small>
+                </div>
+                <label for="gender">Hobbies</label>
+                <div class="form-group" formGroupName="hobbies">
+                   
+                    <span *ngFor="let hobbi of hobbieList">
+                        <input type="checkbox" class="form-check-input me-1"
+                            [value]="hobbi" [name]="hobbi" 
+                            [formControlName]="hobbi">
+                        <label for="music" class="form-check-label me-2">{{hobbi | uppercase}}</label>
+                    </span>
+                       
+                   
+                    <small 
+                    *ngIf="!reactForm.get('hobbies')?.valid && reactForm.get('hobbies')?.touched" 
+                    class="form-text text-danger">
+                        Select any one hobbies
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label for="company">Company</label>
+                    <select class="form-control" id="company"                     
+                   formControlName="company">
+                        <option>Google</option>
+                        <option>Microsoft</option>
+                        <option>Amazon</option>
+                        <option>Facebook</option>
+                        <option>Netflix</option>
+                        <option>Apple</option>
+                        <option>Samsung</option>
+                    </select>
+                    <small 
+                    *ngIf="!reactForm.get('company')?.valid && reactForm.get('company')?.touched" 
+                    class="form-text text-danger">
+                        Select any one company
+                    </small>
+                </div>
+
+                <input type="button" value="Back" name="back" id="back"
+                (click)="back()"
+                class="btn btn-primary mt-3 me-3">
+                <input type="button" value="Clear" name="clear" id="claer"
+                (click)="clearForm()"
+                class="btn btn-danger mt-3 me-3">
+                <input type="button" value="Get Data" name="getData" id="getData"
+                (click)="getData()"
+                class="btn btn-danger mt-3 me-3">
+                <input type="submit" value="Save" name="save" id="save"
+                [disabled]="!reactForm.valid" 
+                class="btn btn-primary mt-3 me-3">
+            </form>
+        </div>
+    </div>
+</div>

@@ -8,7 +8,6 @@ const routes: Routes = [
   {path: '', component: HomeComponent, pathMatch: 'full'},
   {path: 'template', component: TemplateFormComponent},
   {path: 'reactive', component: ReactiveFormComponent},
-  {path: 'reactive', component: ReactiveFormComponent},
 ];
 
 @NgModule({
