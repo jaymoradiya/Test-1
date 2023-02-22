@@ -15,5 +15,8 @@ export const Hobbies = [
   'cricket',
   'chess',
   'read',
-  'singing'
+  'singing',
+  // 'dancing',
+  // 'swimming',
+  // 'coin-collection',
 ];

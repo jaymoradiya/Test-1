@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../user.service';
 import { NgForm } from '@angular/forms';
 import { Hobbies, UserModel } from '../model/user.model';
+import { OnlyAlphabetsDirective } from "../only-alphabets.directive";
 
 @Component({
   selector: 'app-template-form',

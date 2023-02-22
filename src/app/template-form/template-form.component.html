@@ -11,8 +11,10 @@
                         id="firstName" 
                         name="firstName"
                         required 
+                        appOnlyAlphabets
                         [(ngModel)]="user.firstName"
-                        placeholder="First Name">
+                        placeholder="First Name"
+                        contenteditable="true">
                         <small 
                         *ngIf="!tempForm.form.get('firstName')?.valid && tempForm.form.get('firstName')?.touched" 
                         class="form-text text-danger">
@@ -26,6 +28,7 @@
                         id="middleName" 
                         name="middleName"
                         required
+                        appOnlyAlphabets
                         [(ngModel)]="user.middleName"
                         placeholder="Middle Name">
                         <small 
@@ -41,6 +44,7 @@
                         id="lastName" 
                         name="lastName"
                         required 
+                        appOnlyAlphabets
                         [(ngModel)]="user.lastName"
                         placeholder="Last Name">
                         <small 
