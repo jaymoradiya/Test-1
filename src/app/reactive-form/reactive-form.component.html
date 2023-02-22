@@ -76,11 +76,11 @@
                 <label for="gender">Hobbies</label>
                 <div class="form-group" formGroupName="hobbies">
                    
-                    <span *ngFor="let hobbi of hobbieList">
+                    <span *ngFor="let hobby of hobbyList">
                         <input type="checkbox" class="form-check-input me-1"
-                            [value]="hobbi" [name]="hobbi" 
-                            [formControlName]="hobbi">
-                        <label for="music" class="form-check-label me-2">{{hobbi | uppercase}}</label>
+                            [value]="hobby" [name]="hobby" 
+                            [formControlName]="hobby">
+                        <label for="music" class="form-check-label me-2">{{hobby | uppercase}}</label>
                     </span>
                        
                    

@@ -13,7 +13,7 @@ export class TemplateFormComponent implements OnInit {
 
   @ViewChild('tempForm')
   tempForm : NgForm | undefined;
-  hobbieList = Hobbies;
+  hobbyList = Hobbies;
 
   userId : string | undefined;
   user : UserModel  = {

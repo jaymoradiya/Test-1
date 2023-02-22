@@ -12,15 +12,14 @@ import { FormControl, FormGroup, NgForm, Validators , FormArray} from '@angular/
 export class ReactiveFormComponent {
   
   reactForm: FormGroup = new FormGroup({});
-  hobbieList = Hobbies;
-  hobbiesDefault = {
-    'chess': false,
-    'cricket': false,
-    'read': false,
-    'singing': false,
-    'music': false,
-
-  };
+  hobbyList = Hobbies;
+  // hobbiesDefault = {
+  //   'chess': false,
+  //   'cricket': false,
+  //   'read': false,
+  //   'singing': false,
+  //   'music': false,
+  // };
   userId : string | undefined;
   user : UserModel  = {
     id: '',
@@ -29,27 +28,24 @@ export class ReactiveFormComponent {
     middleName: '',
     age: 0,
     gender: '',
-    hobbies: this.hobbiesDefault,
+    hobbies: {},
     company: '',
   };
 
 
   constructor(private router: Router, private route: ActivatedRoute,private userService: UserService){
    
-    
+     
     this.reactForm = new FormGroup({
       'firstName': new FormControl('',{validators: [Validators.required, ]}),
       'lastName':  new FormControl('',{validators: [Validators.required, ]}),
       'middleName':  new FormControl('',{validators: [Validators.required, ]}),
       'age':  new FormControl('',{validators: [Validators.required,]}),
       'gender': new FormControl('',{validators: [Validators.required,]}),
-      'hobbies': new FormGroup({
-        'music': new FormControl(false,),
-        'cricket':  new FormControl(false,),
-        'chess':  new FormControl(false,),
-        'read':  new FormControl(false),
-        'singing': new FormControl(false),
-      }),
+      'hobbies': new FormGroup(this.hobbyList.reduce((acc: any,crr) => {
+         acc[crr] = new FormControl(false);
+        return acc;
+      },[])),
       'company': new FormControl('',{validators: [Validators.required,]})
     });
   }
@@ -81,18 +77,28 @@ export class ReactiveFormComponent {
   getData(){
     if (this.userService.isUserExist(this.userId!)){
       this.user = this.userService.getUser(this.userId!)!;
-      this.hobbieList.forEach(h => {
+      
+      // Adding left over hobbies
+      this.hobbyList.forEach(h => {
         if(this.user.hobbies[h] == undefined){
           this.user.hobbies[h] = false
         }
       })
+
+      // removing extra hobbies
+      this.user.hobbies = Object.keys(this.user.hobbies).reduce((newObj : any, key) => {
+        if (this.hobbyList.includes(key)) {
+          newObj[key] = this.user.hobbies[key];
+        }
+        return newObj;
+      }, {});
       const tmp = {
         "firstName" :this.user.firstName,
         "lastName" :this.user.lastName,
         "middleName" :this.user.middleName,
         "age" :this.user.age,
         "gender" :this.user.gender,
-        "hobbies":this.user.hobbies,
+        "hobbies": this.user.hobbies,
         "company" :this.user.company,
      };
      console.log(tmp);

@@ -25,7 +25,7 @@ export class HomeComponent {
     const id = this.idForm?.form.get('id')?.value;
     // if(this.userService.isUserExist(id)){
     this.router.navigate(['template'], {queryParams: {id: id}});
-    //   return;
+      //   return;
     // }
     // this.error = "user doesn't exist!";
     
