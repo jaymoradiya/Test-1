@@ -1,23 +1,22 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UserService } from '../user.service';
+import { UserService } from '../../services/user.service';
 import { NgForm } from '@angular/forms';
-import { Hobbies, UserModel } from '../model/user.model';
-import { OnlyAlphabetsDirective } from "../only-alphabets.directive";
+import { Hobbies, UserModel } from '../../model/user.model';
+import { OnlyAlphabetsDirective } from '../../directives/only-alphabets.directive';
 
 @Component({
   selector: 'app-template-form',
   templateUrl: './template-form.component.html',
-  styleUrls: ['./template-form.component.css']
+  styleUrls: ['./template-form.component.css'],
 })
 export class TemplateFormComponent implements OnInit {
-
   @ViewChild('tempForm')
-  tempForm : NgForm | undefined;
+  tempForm: NgForm | undefined;
   hobbyList = Hobbies;
 
-  userId : string | undefined;
-  user : UserModel  = {
+  userId: string | undefined;
+  user: UserModel = {
     id: '',
     firstName: '',
     lastName: '',
@@ -28,45 +27,33 @@ export class TemplateFormComponent implements OnInit {
     company: '',
   };
 
-  constructor(private router: Router, private route: ActivatedRoute,private userService: UserService){
-    
-  }
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private userService: UserService
+  ) {}
 
   ngOnInit(): void {
     this.userId = this.route.snapshot.queryParams['id'];
-    if (this.userService.isUserExist(this.userId!)){
+    if (this.userService.isUserExist(this.userId!)) {
       this.user = this.userService.getUser(this.userId!)!;
     }
 
-    this.route.queryParams.subscribe(qp=> {
+    this.route.queryParams.subscribe((qp) => {
       this.userId = qp['id'];
-      if (this.userService.isUserExist(qp['id'])){
+      if (this.userService.isUserExist(qp['id'])) {
         this.user = this.userService.getUser(qp['id'])!;
       }
     });
-    
   }
 
-  onTempFormSubmit(){
+  onTempFormSubmit() {
     this.user.id = this.userId!;
     this.userService.saveUser(this.user);
-    this.router.navigate(['/reactive'],{queryParamsHandling: 'preserve'})
+    this.router.navigate(['/reactive'], { queryParamsHandling: 'preserve' });
   }
 
-  clearForm(){
-    this.user = {
-      id: '',
-      firstName: '',
-      lastName: '',
-      middleName: '',
-      age: 0,
-      gender: '',
-      hobbies: {},
-      company: '',
-    };
-  }
-
-  back(){
+  back() {
     this.router.navigate(['../']);
   }
 }
